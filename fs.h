@@ -17,6 +17,7 @@ struct superblock {
   uint nblocks;      // Number of data blocks
   uint ninodes;      // Number of inodes.
   uint nlog;         // Number of log blocks
+  uint reserved[24]; // Reserved for future expansion
 };
 
 #define NDIRECT 12
@@ -30,6 +31,7 @@ struct dinode {
   short minor;          // Minor device number (T_DEV only)
   short nlink;          // Number of links to inode in file system
   uint size;            // Size of file (bytes)
+  uint reserved[16]; 	// reserved for now
   uint addrs[NDIRECT+1];   // Data block addresses
 };
 

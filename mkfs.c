@@ -13,10 +13,10 @@
 
 #define static_assert(a, b) do { switch (0) case 0: case (a): ; } while (0)
 
-int nblocks = 985;
+int nblocks = 1934;
 int nlog = LOGSIZE;
-int ninodes = 200;
-int size = 1024;
+int ninodes = 400;
+int size = 2048;
 
 int fsfd;
 struct superblock sb;
@@ -74,6 +74,7 @@ main(int argc, char *argv[])
     exit(1);
   }
 
+  fprintf(stderr, "dinode is %lu\n", sizeof(struct dinode));
   assert((512 % sizeof(struct dinode)) == 0);
   assert((512 % sizeof(struct dirent)) == 0);
 
