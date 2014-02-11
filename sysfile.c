@@ -87,6 +87,22 @@ sys_write(void)
   return filewrite(f, p, n);
 }
 
+// Minimalish implementation of isatty for xv6. Maybe it will even work, but 
+// hopefully it will be sufficient for now.
+int sys_isatty(void) {
+  int fd;
+  struct file *f;
+  argfd(0, &fd, &f);
+  if (f->type == FD_INODE) {
+    /* This is bad and wrong, but currently works. Either when more 
+     * sophisticated terminal handling comes, or more devices, or both, this
+     * will need to distinguish different device types. Still, it's a start. */
+    if (f->ip != 0 && f->ip->type == T_DEV)
+      return 1;
+  }
+  return 0;
+}
+
 // lseek derived from https://github.com/hxp/xv6, written by Joel Heikkila
 
 int sys_lseek(void) {
